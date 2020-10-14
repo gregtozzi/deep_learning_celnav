@@ -69,7 +69,7 @@ We made a number of engineering assumptions to make the problem tractable as a t
 ### 2.3 Components
 Our system consists of a cloud component and an edge component.  An image generator creates batches of synthetic images, names them using a descriptive scheme that allows easy indexing by location and time, and stores the models in object storage buckets indexed by location and time.  The model trainer pulls from these buckets to create models specific to a bounded geographic area at a given with certain time bounds.  These models are stored in object storage.  The edge device—in this case a Jetson TX2—captures an image of the sky and the time at which the image was taken.  The inference engine performs a forward pass of the model, returning the vessel's predicted location as raw output.
 
-![System diagram](https://github.com/travisrmetz/w251-project/blob/master/report_images/system_diagram.png)
+![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/system_diagram.png)
 
 *[Return to contents](#Contents)*
 
@@ -91,7 +91,7 @@ We want our loss function to minimize the navigational error returned by the mod
 
 The haversine function is given below.  The value of interest, _d_, is the distance between two points defined by latitude longitude pairs [_φ_<sub>1</sub>, _λ_<sub>1</sub>] and [_φ_<sub>2</sub>, _λ_<sub>2</sub>].  The value _r_ is the radius of the Earth and sets the units.  We chose our _r_ to provide an output in nautical miles.
 
-![System diagram](https://github.com/travisrmetz/w251-project/blob/master/report_images/haversine.png)
+![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/haversine.png)
 
 The haversine function is strictly positive and is continuously differentiable in all areas of interest.  Minimizing the haversine loss minimizes the error between predicted and actual locations, and the negative gradient of the function gives the direction of steepest descent in terms of the predicted latitude and longitude.
 
@@ -108,7 +108,7 @@ Stellarium is designed for desktop operation.  Our Docker container allows the p
 
 [![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtZQU1MIEZpbGVdIC0tZnJvbSBob3N0LS0-IEIoU1NDIEdlbmVyYXRvciAtIFB5dGhvbilcbiAgQiAtLT4gQyhTdGVsbGFyaXVtKVxuICBDIC0tPiBEKFh2ZmIpXG4gIEQgLS1zY3JlZW4gY2FwdHVyZS0tPiBDXG4gIEMgLS10byBob3N0LS0-IEVbUzMgQnVja2V0XVxuICBDIC0tdG8gaG9zdC0tPiBGW0xvY2FsIFN0b3JhZ2VdXG4gIEYgLS1mcm9tIGhvc3QtLT4gRyhQcmVwcm9jZXNzb3IgLSBOdW1weSBvdXRwdXQpXG4gIEcgLS10byBob3N0LS0-IEVcbiAgRyAtLXRvIGhvc3QtLT4gRlxuXG5cdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6Im5ldXRyYWwifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)](https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbiAgQVtZQU1MIEZpbGVdIC0tZnJvbSBob3N0LS0-IEIoU1NDIEdlbmVyYXRvciAtIFB5dGhvbilcbiAgQiAtLT4gQyhTdGVsbGFyaXVtKVxuICBDIC0tPiBEKFh2ZmIpXG4gIEQgLS1zY3JlZW4gY2FwdHVyZS0tPiBDXG4gIEMgLS10byBob3N0LS0-IEVbUzMgQnVja2V0XVxuICBDIC0tdG8gaG9zdC0tPiBGW0xvY2FsIFN0b3JhZ2VdXG4gIEYgLS1mcm9tIGhvc3QtLT4gRyhQcmVwcm9jZXNzb3IgLSBOdW1weSBvdXRwdXQpXG4gIEcgLS10byBob3N0LS0-IEVcbiAgRyAtLXRvIGhvc3QtLT4gRlxuXG5cdFx0IiwibWVybWFpZCI6eyJ0aGVtZSI6Im5ldXRyYWwifSwidXBkYXRlRWRpdG9yIjpmYWxzZX0)
 
-[_Installing and running the image generator_](https://github.com/travisrmetz/w251-project/tree/master/image_generator)
+[_Installing and running the image generator_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/image_generator)
 
 *[Return to contents](#Contents)*
 
@@ -121,7 +121,7 @@ We provide a Docker container to handle the task of preprocessing images into Nu
 
 The data are broken into training and validation sets based on a user-provided split and random assignment.
 
-[_Installing and running the preprocessor_](https://github.com/travisrmetz/w251-project/tree/master/training/preprocessor)
+[_Installing and running the preprocessor_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/training/preprocessor)
 
 ### 5.2 Training
 We use the [ktrain](https://towardsdatascience.com/ktrain-a-lightweight-wrapper-for-keras-to-help-train-neural-networks-82851ba889c) package to train the models [[15]](#15).  The `tensorflow.keras.model` object is wrapped in a `ktrain.learner` object to simplify training and access ktrain's built in callbacks.  We train using the `ktrain.learner.autofit` function with an initial maximum learning rate of 2-4.  The training function applies the triangular learning rate policy with reduction in maximum learning rate when a plateau is encountered on the validation loss introduced by Smith [[16]](#16).
@@ -130,18 +130,18 @@ The container saves models in the `.h5` format to a user-specified directory tha
 
 We established an experimental space from 36°N to 40°N, from 074°W to 078°W, and from 2020-05-25T22:00:00 UTC to 2020-05-26T02:00:00 UTC.  We trained the model using 6,788 images reduced to single channel 224 x 224.  We validated on 715 images similarly reduced in color and resolution.  The base images were of different aspect ratios.  The training routine uses a batch size of 32.  The figure below details the application of the triangular learning rate policy.
 
-![System diagram](https://github.com/travisrmetz/w251-project/blob/master/report_images/lr_policy.png)
+![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/lr_policy.png)
 
 Training loss converged to approximately 5.5 nautical miles and validation loss converged to just over 6.5 nautical miles after 52 epochs as shown below.
 
-![System diagram](https://github.com/travisrmetz/w251-project/blob/master/report_images/train_val_loss.png)
+![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/train_val_loss.png)
 
-[_Installing and running the training container_](https://github.com/travisrmetz/w251-project/tree/master/training)
+[_Installing and running the training container_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/training)
 
 ### 5.3 Performance on a Notional Vessel Transit
 We consider a four-hour period in the test area defined above.  A notional vessel is in position TODO on a course of 208° true—that is, referenced to true north—at a speed of 12 nautical miles per hour or _knots_.  A nautical mile is slightly longer than a statute mile.  The vessel employs our system to fix its position hourly beginning at 22:00 UTC.  The chart below is overlaid with the vessel's actual positions in blue and predicted positions in red.
 
-![Notional transit](https://github.com/travisrmetz/w251-project/blob/master/report_images/chart_12200.png)
+![Notional transit](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/chart_12200.png)
 
 Our model is trained using a spatial-temporal grid based on our intuition that the model is learning an interpolation and should, therefore, be trained on data spaced at regular intervals.  Spatial interpolation was generally quite good.  Temporal interpolation was more challenging, likely owing to our decision to limit the temporal density to 20-minute intervals during training.  Mariners typically take fixes at regular intervals on the hour, half hour, quarter hour, etc..., and our fix interval for the example above aligns with times trained on the temporal grid.  We leave improving temporal interpolation as an area for further study.
 
@@ -157,7 +157,7 @@ The camera container does much of the image preprocessing (primarily reducing an
 
 The MQTT broker sits between the camera container and the inference container and acts as a bridge to pass images (and the file name which has the ground truth embedded it and is used for assessing prediction accuracy).
 
-[_Installing and running the camera and broker containers_](https://github.com/travisrmetz/w251-project/tree/master/inference/edge_network)
+[_Installing and running the camera and broker containers_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/inference/edge_network)
 
 ### 6.2 Inference Container
 
@@ -165,9 +165,9 @@ The inference container runs the TensorFlow model that was trained in the cloud.
 
 The screenshot below shows the edge device at work.  In the lower right you have the camera container.  In the lower left you have the test image it generated (after preprocessing).  In the upper left is the broker that provides communication to the inference engine.  And in the upper right is the inference container with readouts from two different prediction requests sent to it by the camera container.
 
-![Camera, broker and inference engine at work](https://github.com/travisrmetz/w251-project/blob/master/report_images/screenshot_of_inference.png)
+![Camera, broker and inference engine at work](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/screenshot_of_inference.png)
 
-[_Installing and running the inference container_](https://github.com/travisrmetz/w251-project/tree/master/inference)
+[_Installing and running the inference container_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/inference)
 
 *[Return to contents](#Contents)*
 
@@ -179,7 +179,7 @@ This section walks through a detailed example of generating synthetic data, trai
 We begin by provisioning a virtual server on a cloud provider.  Rather to storing to object storage, we will store the images locally to train the model on the same virtual server.  We create a local directory to hold the images.  We then clone the repo and `cd` into the `image_generator` directory.
 
 ```
-git clone https://github.com/travisrmetz/w251-project.git
+git clone https://github.com/gregtozzi/deep_learning_celnav.git
 mkdir /data/image_train_val
 mkdir /data/image_test
 cd w251-project/image_generator
@@ -263,9 +263,9 @@ You should now see your trained model in `data/models` on the host machine.
 
 ### 7.4 Spooling up Edge Device for Images and Predictions
 
-[_Installing and running the camera and broker containers_](https://github.com/travisrmetz/w251-project/tree/master/inference/edge_network)
+[_Installing and running the camera and broker containers_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/inference/edge_network)
 
-[_Installing and running the inference container_](https://github.com/travisrmetz/w251-project/tree/master/inference)
+[_Installing and running the inference container_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/inference)
 
 
 

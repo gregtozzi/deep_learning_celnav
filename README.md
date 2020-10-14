@@ -91,7 +91,7 @@ We want our loss function to minimize the navigational error returned by the mod
 
 The haversine function is given below.  The value of interest, _d_, is the distance between two points defined by latitude longitude pairs [_φ_<sub>1</sub>, _λ_<sub>1</sub>] and [_φ_<sub>2</sub>, _λ_<sub>2</sub>].  The value _r_ is the radius of the Earth and sets the units.  We chose our _r_ to provide an output in nautical miles.
 
-![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/haversine.png)
+![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/main/report_images/haversine.png)
 
 The haversine function is strictly positive and is continuously differentiable in all areas of interest.  Minimizing the haversine loss minimizes the error between predicted and actual locations, and the negative gradient of the function gives the direction of steepest descent in terms of the predicted latitude and longitude.
 

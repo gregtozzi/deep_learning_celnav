@@ -165,9 +165,9 @@ The inference container runs the TensorFlow model that was trained in the cloud.
 
 The screenshot below shows the edge device at work.  In the lower right you have the camera container.  In the lower left you have the test image it generated (after preprocessing).  In the upper left is the broker that provides communication to the inference engine.  And in the upper right is the inference container with readouts from two different prediction requests sent to it by the camera container.
 
-![Camera, broker and inference engine at work](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/screenshot_of_inference.png)
+![Camera, broker and inference engine at work](https://github.com/gregtozzi/deep_learning_celnav/blob/main/report_images/screenshot_of_inference.png)
 
-[_Installing and running the inference container_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/inference)
+[_Installing and running the inference container_](https://github.com/gregtozzi/deep_learning_celnav/tree/main/inference)
 
 *[Return to contents](#Contents)*
 
@@ -263,9 +263,9 @@ You should now see your trained model in `data/models` on the host machine.
 
 ### 7.4 Spooling up Edge Device for Images and Predictions
 
-[_Installing and running the camera and broker containers_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/inference/edge_network)
+[_Installing and running the camera and broker containers_](https://github.com/gregtozzi/deep_learning_celnav/tree/main/inference/edge_network)
 
-[_Installing and running the inference container_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/inference)
+[_Installing and running the inference container_](https://github.com/gregtozzi/deep_learning_celnav/tree/main/inference)
 
 
 

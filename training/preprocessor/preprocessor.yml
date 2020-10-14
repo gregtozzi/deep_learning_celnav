@@ -1,0 +1,21 @@
+# YAML file for automated .ssc script generation
+# converted paths for GMT Mac
+---
+train_val_path: "/data/image_train_val"
+test_path: "/data/image_test"
+array_path: "/data/sets"
+
+# Latitude settings
+latstart:  36
+latrange:   4
+
+# Longitude settings
+longstart: -78
+longrange:   4
+
+# Date and time settings
+dtstart: '2020-08-06T02:00:00'
+dtend:   '2020-06-01T08:00:00'
+
+# Train/Val split
+tv_split: 0.1

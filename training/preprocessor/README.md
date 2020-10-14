@@ -1,4 +1,4 @@
-[_Return to the white paper_](https://github.com/travisrmetz/w251-project#Train)
+[_Return to the white paper_](https://github.com/gregtozzi/deep_learning_celnav#Train)
 
 # Preprocessing Images to Numpy Arrays
 ## W251 - Final Project - Metz/Tozzi - Summer 2020

@@ -1,0 +1,23 @@
+# YAML file for automated .ssc script generation
+# converted paths for GMT Mac
+---
+image_path: "/image_test"
+
+# Image orientation and field of view
+azi: 0
+alt: 89
+fov: 110
+
+# Latitude settings
+latstart:  36
+latend:    40
+
+# Longitude settings
+longstart: -74
+longend:   -78
+
+# Date and time settings
+dtstart: '2020-08-06T02:00:00'
+dtend:   '2020-06-01T08:00:00'
+
+number_images: 10

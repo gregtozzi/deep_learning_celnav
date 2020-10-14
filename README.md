@@ -130,11 +130,11 @@ The container saves models in the `.h5` format to a user-specified directory tha
 
 We established an experimental space from 36°N to 40°N, from 074°W to 078°W, and from 2020-05-25T22:00:00 UTC to 2020-05-26T02:00:00 UTC.  We trained the model using 6,788 images reduced to single channel 224 x 224.  We validated on 715 images similarly reduced in color and resolution.  The base images were of different aspect ratios.  The training routine uses a batch size of 32.  The figure below details the application of the triangular learning rate policy.
 
-![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/lr_policy.png)
+![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/main/report_images/lr_policy.png)
 
 Training loss converged to approximately 5.5 nautical miles and validation loss converged to just over 6.5 nautical miles after 52 epochs as shown below.
 
-![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/train_val_loss.png)
+![System diagram](https://github.com/gregtozzi/deep_learning_celnav/blob/main/report_images/train_val_loss.png?raw=true)
 
 [_Installing and running the training container_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/training)
 

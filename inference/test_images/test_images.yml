@@ -1,0 +1,14 @@
+# YAML file for automated test images
+---
+image_path: "/w251-project/inference/test_images/images"
+script_path: "/home/trmetz/.stellarium/scripts/"
+azi: 0
+alt: 89
+fov: 110
+latstart: 36
+latend: 40
+longstart: -78
+longend: -74
+dtstart: '2020-05-25T22:00:00'
+dtend: '2020-05-26T02:00:00'
+number_images: 50

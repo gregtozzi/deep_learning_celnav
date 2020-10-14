@@ -139,9 +139,9 @@ Training loss converged to approximately 5.5 nautical miles and validation loss 
 [_Installing and running the training container_](https://github.com/gregtozzi/deep_learning_celnav/tree/master/training)
 
 ### 5.3 Performance on a Notional Vessel Transit
-We consider a four-hour period in the test area defined above.  A notional vessel is in position TODO on a course of 208° true—that is, referenced to true north—at a speed of 12 nautical miles per hour or _knots_.  A nautical mile is slightly longer than a statute mile.  The vessel employs our system to fix its position hourly beginning at 22:00 UTC.  The chart below is overlaid with the vessel's actual positions in blue and predicted positions in red.
+We consider a four-hour period in the test area defined above.  A notional vessel is on a course of 208° true—that is, referenced to true north—at a speed of 12 nautical miles per hour or _knots_.  A nautical mile is slightly longer than a statute mile.  The vessel employs our system to fix its position hourly beginning at 22:00 UTC.  The chart below is overlaid with the vessel's actual positions in blue and predicted positions in red.
 
-![Notional transit](https://github.com/gregtozzi/deep_learning_celnav/blob/master/report_images/chart_12200.png)
+![Notional transit](https://github.com/gregtozzi/deep_learning_celnav/blob/main/report_images/chart_12200.png?raw=true)
 
 Our model is trained using a spatial-temporal grid based on our intuition that the model is learning an interpolation and should, therefore, be trained on data spaced at regular intervals.  Spatial interpolation was generally quite good.  Temporal interpolation was more challenging, likely owing to our decision to limit the temporal density to 20-minute intervals during training.  Mariners typically take fixes at regular intervals on the hour, half hour, quarter hour, etc..., and our fix interval for the example above aligns with times trained on the temporal grid.  We leave improving temporal interpolation as an area for further study.
 

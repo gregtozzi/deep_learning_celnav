@@ -4,14 +4,11 @@
 
 *This is my final project—completed with Travis Metz—from the [deep learning in the cloud and at the edge](https://www.ischool.berkeley.edu/courses/datasci/251) course that I took as part of the UC Berkeley School of Information's [Master of Information and Data Science](https://datascience.berkeley.edu) program.  We examined the feasiblity of automated deep learning-enabled celestial navigation by training a hybrid deep and convolutional neural network on synthetic images of the sky coupled with a representation of the time at which the images were taken.  We implemented the haversine formula as a custom loss function for the model.  We generated, pre-processed, and trained on synthetic images in the cloud and conducted inferencing on a Jetson TX2.*
 
+**Skills demonstrated:** *Deep regression for computer vision* | *Implementing custom loss functions* | *The TensorFlow functional API* | *Training in the cloud* | *Generating synthetic data* | *Inferencing at the edge* | *Containerizing components*
 
-**Skills demonstrated:** *Deep regression for computer vision* | *Implementing custom loss functions* | *Training in the cloud* | Generating synthetic data | Deploying inferencing to the edge | Containerizing application components with Docker
-
-**Languages and frameworks**: *Python* | *TensorFlow* | *Keras* | *ktrain* | *Shell scripting*
+**Languages and frameworks**: *Python* | *TensorFlow* | *Keras* | *ktrain* | *Bash* | *Docker*
 
 ### Continue on to read the white paper
-
-### [Back to Portfolio](https://github.com/gregtozzi/portfolio)
 
 ##  <a id="Contents">Contents
 [1.0 Introduction](#Introduction)
